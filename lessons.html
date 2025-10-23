@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
@@ -25,7 +24,7 @@
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: url('A_2D_digital_illustration_login_and_registration_s.png') center/cover no-repeat;
+    background: url('./A_2D_digital_illustration_login_and_registration_s.png') center/cover no-repeat;
     opacity: 0.06;
     z-index: 0;
   }
@@ -77,27 +76,42 @@
   const specialty = localStorage.getItem('specialty') || 'غير محدد';
   const level = localStorage.getItem('level') || 'غير محدد';
   const subject = localStorage.getItem('subject') || 'غير محدد';
-
   document.getElementById('subjectName').textContent = `الدروس - ${subject}`;
 
   // ✅ قاعدة بيانات الدروس لكل مادة
   const lessonsData = {
     'طب الأسنان': {
       'سنة 2': {  
-        'Parodontologie': ['Introduction à la Parodontologie','Histoire de la parodontologie','la gencive','L’attache épithéliale','Le ligament alvéolo-dentaire',],
-        'Microbiologie': ['Physiologie bactérienne dentaire','Les antibiotiques',],
-        'Anatomie dentaire': ['Généralités et notions de bases en Anatomie dentaire','Nomenclature','Terminologie',],
-        'Anatomie humaine':['Os de la tête  os frontal et os éthmoïde','Os du crâne II : sphénoïde, temporal, pariétal','Os du crane III',],
+        'Parodontologie': ['Introduction à la Parodontologie','Histoire de la parodontologie','la gencive','L’attache épithéliale','Le ligament alvéolo-dentaire'],
+        'Microbiologie': ['Physiologie bactérienne dentaire','Les antibiotiques'],
+        'Anatomie dentaire': ['Généralités et notions de bases en Anatomie dentaire','Nomenclature','Terminologie'],
+        'Anatomie humaine':['Os de la tête I : os frontal et os éthmoïde','Os du crâne II : sphénoïde, temporal, pariétal','Os du crane III'],
         'Prothèse':['Les indices biologiques'],
-        'Pathologie':['Cabinet Dentaire et Dispositifs chirurgicaux',],
+        'Pathologie':['Cabinet Dentaire et Dispositifs chirurgicaux'],
         'Oce':[],
-        'ODF':['Introduction à l’Orthopédie Dento-Faciale','Les critères d’harmonie du visage','Les fonctions oro-faciales',],
+        'ODF':['Introduction à l’Orthopédie Dento-Faciale','Les critères d’harmonie du visage','Les fonctions oro-faciales'],
         'immunologie':[],
         'histologie':[],
         'physiologie':[],
         'biomateriaux':[]
       }
     }
+  };
+
+  // ✅ خريطة تربط اسم المادة باسم الملف داخل مجلد qcms
+  const subjectFileMap = {
+    'Anatomie humaine': 'anatomiehumaine',
+    'Anatomie dentaire': 'anatomiedentaire',
+    'Parodontologie': 'parodontologie',
+    'Prothèse': 'prothese',
+    'ODF': 'odf',
+    'Oce': 'oce',
+    'Pathologie': 'pathologie',
+    'Microbiologie': 'microbiologie',
+    'immunologie': 'immunologie',
+    'histologie': 'histologie',
+    'physiologie': 'physiologie',
+    'biomateriaux': 'biomateriaux'
   };
 
   // ✅ عرض الدروس الخاصة بالمادة المختارة
@@ -114,15 +128,10 @@
       div.textContent = lesson;
       div.onclick = () => {
         localStorage.setItem('lesson', lesson);
-        
-        // 🧩 توليد اسم الصفحة تلقائيًا بناءً على المادة
-        const fileName = subject
-          .toLowerCase()
-          .replace(/\s+/g, '')
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "");
-        
-        window.location.href = `qcms/${fileName}.html`;
+
+        const fileName = subjectFileMap[subject] || subject.toLowerCase().replace(/\s+/g, '');
+        // ✅ تعديل الربط هنا ليدخل إلى مجلد qcms
+        window.location.href = `./qcms/${fileName}.html`;
       };
       lessonsListDiv.appendChild(div);
     });
@@ -131,6 +140,6 @@
   }
 </script>
 
-<script src="security.js"></script>
+<script src="./security.js"></script>
 </body>
 </html>
