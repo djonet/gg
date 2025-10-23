@@ -98,6 +98,22 @@
     }
   };
 
+  // ✅ خريطة تربط اسم المادة باسم الملف داخل مجلد qcms
+  const subjectFileMap = {
+    'Anatomie humaine': 'anatomiehumaine',
+    'Anatomie dentaire': 'anatomiedentaire',
+    'Parodontologie': 'parodontologie',
+    'Prothèse': 'prothese',
+    'ODF': 'odf',
+    'Oce': 'oce',
+    'Pathologie': 'pathologie',
+    'Microbiologie': 'microbiologie',
+    'immunologie': 'immunologie',
+    'histologie': 'histologie',
+    'physiologie': 'physiologie',
+    'biomateriaux': 'biomateriaux'
+  };
+
   // ✅ عرض الدروس الخاصة بالمادة المختارة
   const lessonsListDiv = document.getElementById('lessonsList');
 
@@ -113,14 +129,7 @@
       div.onclick = () => {
         localStorage.setItem('lesson', lesson);
 
-        // 🧩 توليد اسم الصفحة تلقائيًا بناءً على المادة
-        const fileName = subject
-          .toLowerCase()
-          .replace(/\s+/g, '')
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "");
-
-        // ✅ استخدم ./ لتوافق GitHub Pages
+        const fileName = subjectFileMap[subject] || subject.toLowerCase().replace(/\s+/g, '');
         window.location.href = `./qcms/${fileName}.html`;
       };
       lessonsListDiv.appendChild(div);

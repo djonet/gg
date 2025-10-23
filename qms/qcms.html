@@ -15,7 +15,7 @@
     apiKey: "AIzaSyBldr32JPJGdMyZZBT1PD2eHvE48QkVtU8",
     authDomain: "qcm-djo.firebaseapp.com",
     projectId: "qcm-djo",
-    storageBucket: "qcm-djo.firebasestorage.app",
+    storageBucket: "qcm-djo.appspot.com", /* ✅ تم تصحيح الـ bucket */
     messagingSenderId: "384943172069",
     appId: "1:384943172069:web:6b59c1b9b31f2fe097a70c",
     measurementId: "G-13MC1GT4HM"
@@ -154,12 +154,12 @@
   </div>
 
 <script>
-  // ✅ التوجيه إلى صفحة الدروس مع بيانات LocalStorage
+  // ✅ التوجيه إلى صفحة الدروس مع حفظ بيانات المستخدم
   function goToSubject(subject) {
     localStorage.setItem('subject', subject);
     localStorage.setItem('specialty', 'طب الأسنان');
     localStorage.setItem('level', 'سنة 2');
-    window.location.href = './lessons.html'; // ✅ مضاف ./ ليتوافق مع GitHub Pages
+    window.location.href = './lessons.html'; // متوافق مع GitHub Pages
   }
 
   // ✅ تسجيل الخروج من Firebase
